@@ -1,0 +1,42 @@
+1. 
+   | A | B | C | Y |
+- - - - - - - - - - - - - - - 
+   | 0 | 0 | 0 | 1 |
+   | 0 | 0 | 1 | 1 |
+   | 0 | 1 | 0 | 0 |
+   | 0 | 1 | 1 | 1 |
+   | 1 | 0 | 0 | 0 |
+   | 1 | 0 | 1 | 0 |
+   | 1 | 1 | 0 | 0 |
+   | 1 | 1 | 1 | 1 |
+
+
+
+2.
+Y=(~A & ~B)|(B & C)
+
+4.
+No, he is wrong. The unsigned integer could not be negative, so after it count down to 0, it will wrap up to its maximum number of its bit width. The program will terminate after 80 decrements, printing "x=2^N-1", where N is the bit width. 
+
+5.
+(a)00110100
+(b)11001011
+(c)10110011
+(d)11110100
+
+6.
+(a)127
+(b)-65
+(c)-33
+(d)85
+
+7.
+(a)66
+(b)-127 (Overflow,positive+positive wrapped)
+(c)-10
+(d)56 (Overflow, negative+negative wrapped)
+
+8.
+(a)89
+(b)129
+(c)44 (Overflow, positively+positive wrapped)

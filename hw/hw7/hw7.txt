@@ -1,0 +1,71 @@
+2.
+
+After the first three instructions, $3 = 8618 + 16388 = 25006.
+Because there’s no halt, execution falls through into the data words. The word at first (8618 = 0x21AA) decodes to addi $3, $0, 42, which overwrites $3 with 42. The next word at second (16388 = 0x4004) decodes to j 4, a self-loop that halts the program there.
+So the final value in $3 is 42.
+
+
+3.
+
+a) 15 instructions
+b) 60 clock cycles
+c) 60 μs
+
+4.
+
+a) Instruction a & c: movi $1,0 writes $1; add $1,$1,$2 reads $1.
+   Instruction b & c: lw $2, grade1($0) writes $2; add $1,$1,$2 reads $2
+   Instruction d & e: lw $3, grade2($0) writes $3; add $1,$0,$3 reads $3
+
+b)
+Time |  IF |  ID |  EX | MEM |  WB
+------------------------------
+  1  |  a  |     |     |     |
+  2  |  b  |  a  |     |     |
+  3  |  c  |  b  |  a  |     |
+  4  |     |  c  |  b  |  a  |
+  5  |     |  c  |     |  b  |  a   
+  6  |  d  |  c  |     |     |  b
+  7  |  e  |  d  |  c  |     |
+  8  |     |  e  |  d  |  c  |  
+  9  |     |  e  |     |  d  |  c   
+ 10  |     |  e  |     |     |  d   
+ 11  |     |     |  e  |     |
+ 12  |     |     |     |  e  |
+ 13  |     |     |     |     |  e
+
+
+c)
+	abdce
+
+d)
+
+Time |  IF |  ID |  EX | MEM |  WB
+------------------------------
+  1  |  a  |     |     |     |
+  2  |  b  |  a  |     |     |
+  3  |  d  |  b  |  a  |     |
+  4  |  c  |  d  |  b  |  a  |
+  5  |  e  |  c  |  d  |  b  |  a
+  6  |     |  c  |     |  d  |  b   
+  7  |     |  e  |  c  |     |  d
+  8  |     |     |  e  |  c  |
+  9  |     |     |     |  e  |  c
+ 10  |     |     |     |     |  e
+
+
+
+
+5.
+a)	1/T = 1/(400*10^-12) = 2.5 GHz
+b)	1/T = 1/(250*10^-12) = 4 GHz
+
+
+6.
+
+a)With an always-taken predictor, in 3 clock cycles, the branch at ram[3] is not taken five times and taken once, and the branch at ram[5] is not taken 2 times, so there are 5 + 2 = 7 mispredictions, giving a 21-cycle penalty.
+
+b)With an always-not-taken predictor, the branch at ram[3] misses 1 taken, and the branch at ram[5] misses 3 takens, total 1 + 3 = 4 mispredictions and a 12-cycle penalty.
+
+c)With a one-bit dynamic predictor initialized to not taken, ram[3] is correct 5 times and wrong once on the last taken, while ram[5] is wrong on each flip (second, third, and fourth occurrences), so a total of 4 mispredictions and resulting a 12-cycle penalty.
+

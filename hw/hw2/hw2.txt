@@ -1,0 +1,28 @@
+5.
+unsigned int toggleBit2(unsigned int x) {
+	return x ^ 0b10;
+}
+
+6.
+unsigned int flipOffBit5 ( unsigned int x ) {
+	return x & ~0b10000;
+}
+
+7.
+unsigned int repeatBitsThrice ( unsigned int x ) {
+	return (x & 0b111) | ((x & 0b111) << 3) | ((x & 0b111) << 6);
+}
+
+8.
+unsigned int detectBitPattern ( unsigned int x ) {
+	return (x & 0b101100000) == (0b100100000);
+}
+
+9.
+Rupert is wrong. Logical AND (&&) is used to check if both operands are non-zero, returning true if they
+both are, wrong if they are both zero. However, the bitwise operator AND (&) is used to compare two values
+bit by bit, and produce a new value.
+
+example:
+Logical AND (&&): 1 && 2 returns true (1) since both operands are non-zero.
+Bitwise AND (&) : 1 & 2 returns 0 since 0b001 & 0b010 = 0b000, so it returns false. 

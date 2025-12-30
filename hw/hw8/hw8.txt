@@ -1,0 +1,67 @@
+2.
+	0.98*4+0.02*(4+40) = 3.92 + 0.88 = 4.8 ns
+
+3.
+
+With write-through, every store that hits in the L1 also goes to main memory. RAM is always current, which conceptually simplifies sharing data between the four processors. However, every write now uses the shared memory bus, so write-through creates a lot of traffic and can become a bottleneck. It also does not automatically keep the other caches up to date; a core may still hold a stale copy unless we pair write-through with a coherence scheme that broadcasts each write and forces other caches to invalidate or update their copies.
+
+With write-back, a core updates only its local cache and writes the block to memory later (on eviction). This reduces memory traffic, but now main memory may be stale and only one cache holds the newest value. So write-back needs a more sophisticated protocol that tracks which cache has the dirty block and uses invalidate/update messages to ensure other caches never read old data.
+
+4.
+a)
+	L1 = 64-10-9 = 45 bits
+	L2 = 64−13−9 = 42 bits
+
+b)
+	L1 = 4142×1024 = 4,241,408 bits
+	L2 = 4139×8192 = 33,906,688 bits
+
+c)
+	0.05×30+0.03×300=1.5+9=10.5 cycles
+	CPI=1+10.5=11.5
+
+	so average CPI is 11.5
+
+
+5.
+a)
+	M, M, M, H, ME, H, ME, M, ME
+	Hit ratio = 2/9
+
+b)
+	M, M, M, H, M, H, M, M, H
+	Hit ratio = 3/9
+
+c)
+	M, H, M, H, ME, H, H, H, ME
+	Hit ratio = 5/9
+
+d)
+	M, H, M, H, ME, H, H, ME, ME
+	Hit ratio = 4/9
+
+
+6.
+
+| Addr | L1 tag | L1 h/m | L2 row | L2 tag | L2 h/m |
+| ---- | ------ | ------ | ------ | ------ | ------ |
+| 53   | 13     | m      | 0      | 3      | m      |
+| 50   | 12     | m      | 0      | 3      | h      |
+| 52   | 13     | h      | -      | -      | -      |
+| 40   | 10     | m      | 1      | 2      | m      |
+| 60   | 15     | m      | 1      | 3      | m      |
+| 52   | 13     | m      | 0      | 3      | h      |
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

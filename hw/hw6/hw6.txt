@@ -1,0 +1,78 @@
+1.
+	For swi imm7, $regAddr, the ALU needs to return the address contained in R[$regAddr], since it was noted back in the single-cycle E20 that the source of the memory data address comes from the ALU output. Therefore, we drive the ALU using $regAddr as an operand (SRC1), and $0 as an operand (SRC2) to generate R[$regAddr] + 0 = R[$regAddr]. For the immediate value that would be written, we only need to perform one small adjustment to the datapath by adding a new 2:1 mux in front of memory dataIn. The mux will have as input the existing register path, like what normal sw instructions do, and SignExtend7(imm). The mux will have a new control wire that selects which one feeds memory (MUXmemData). For swi data, it would select immediate; for all other instructions it would still select the register path, therefore no other bus or wire is disturbed. The PC still increments by one, data memory write enabled, and register file write disabled.
+
+
+FUNCalu = 0
+
+MUXalu = 0 
+
+MUXimm = 0 
+
+WEdmem = 1 
+
+WErf = 0 
+
+MUXpc = 1 
+
+MUXrf = 0 
+
+MUXtgt = DC 
+
+MUXdst = DC 
+
+MUXmemData = 1
+
+
+
+2.
+
+	Computer B is faster. Using IPS = frequency ÷ CPI, computer A executes 5 GHz ÷ 4 = 1.25 billion instructions per second, while Computer B executes 3 GHz ÷ 2 = 1.5 billion instructions per second. Since 1.5 / 1.25 = 1.20, computer B is 20% faster than computer A.
+
+
+3.
+
+	Since jmpm imm($regAddr) computes a pointer like lw/sw, we can reuse the multicycle datapath and states for address calculation and memory read, and add just one path: feed MDR to MUXpc. This requires extending MUXpc with a new input (call it “MDR”) in addition to the existing options (ALU, pc+1, pc+1+imm, 13-bit imm) and selecting that input in a new WB state to perform pc ← MDR.The pointer itself is produced in EXEC exactly like a load: aluOut ← A + SignExt7(imm).
+
+States: 0 → 1 → 3 → 5 → 16
+
+IF:
+  WEir = 1
+  WEram = 0
+  WEreg = 0
+  WEpc = 1
+  WEa = 0
+  WEb = 0
+  WEalu = 0
+  MUXaddr = 1            
+  MUXpc   = 1             
+
+ID:
+  WEa = 1                
+  WEb = 0
+  MUXr1 = regAddr       
+  MUXb = DC
+
+EXEC:
+  aluOp  = 0               
+  WEalu  = 1
+  MUXalu = 1               
+
+MEM:
+  MUXaddr = 0              
+  WEram   = 0              
+
+WB:
+  WEpc  = 1
+  MUXpc = MDR  
+
+
+
+
+
+
+
+
+
+
+
+      

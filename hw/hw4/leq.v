@@ -1,0 +1,17 @@
+/*          OPCODE SRC  DST  IMMDATA */
+myROM[0] = {movi, RXX, Rg0, 4'b0111};
+myROM[1] = {movi, RXX, Rg1, 4'b0010};
+myROM[2] = {cmp,  Rg0, Rg1, 4'b0000};
+myROM[3] = {jz, RXX, RXX, 4'b1011};
+myROM[4] = {cmpi,  RXX, Rg1, 4'b0000};
+myROM[5] = {jz,  RXX, RXX, 4'b0111};
+myROM[6] = {cmpi,  RXX, Rg0, 4'b0000};
+myROM[7] = {jz,  RXX, RXX, 4'b0111};
+myROM[8] = {subi,  RXX, Rg0, 4'b0001};
+myROM[9] = {cmp,  Rg0, Rg1, 4'b0000};
+myROM[10] = {jz,  RXX, RXX, 4'b0010};
+myROM[11] = {jmp,  RXX, RXX, 4'b1011};
+myROM[12] = {movi,  RXX, Rg2, 4'b0000};
+myROM[13] = {jmp,  RXX, RXX, 4'b0000};
+myROM[14] = {movi,  RXX, Rg2, 4'b0001};
+myROM[15] = {jmp,  RXX, RXX, 4'b0000};

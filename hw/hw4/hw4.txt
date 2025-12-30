@@ -1,0 +1,65 @@
+1) The next instruction will be executed will be at myROM[0]. This is because in myROM[14], the instruction tried to compare the value in Rg0 and Rg0, which will set the zero flag to 1 since it is comparing two exact same registers. Later in myRom[15], the jnz instruction will jump if the zero flag is not set, but it is set actually. So, the jump instruction will not be executed, the program counter will increase by 1 as default. With the fact that the E15 processor has only 16 memory cells, from 0 to 15, the program counter will wrap around to the first memory cell, which is myROM[0].
+
+2) This program first loads the test values into Rg0 and Rg1. It then compares them directly: if they are equal, it immediately sets Rg2 = 1 (true). If not, it checks special cases — if Rg1 is zero, it sets Rg2 = 0, and if Rg0 is zero, it sets Rg2 = 1. Otherwise, the program enters a loop where it repeatedly decrements Rg0 and checks again. If Rg0 ever reaches zero first, it sets Rg2 = 1; if Rg0 becomes equal to Rg1 after a decrement, it sets Rg2 = 0. This ensures that the result in Rg2 is 1 if Rg0 ≤ Rg1, and 0 otherwise.
+
+
+3a) The pc should be expanded to 10 bits. This is because the E15 processor has only 4 bits in the program counter, which allows it to represent the address from 0 to 2^4-1, or myROM[0] to myROM[15]. If we want to store 1024 instructions, a 10 bits pc is required since it can represent address from 0 to 2^10-1, or myROM[0] to myROM[1023].
+
+3b) We have to extend the bit for the immediate value from 4 bits to 10 bits. Although for most of the operations our original E15 implementation is fine, for those jump instructions we have to be able to represent all 1024 memory cells in immediate value. If the immediate value becomes 10 bits, the entire instruction will become 18 bits.
+
+3c) Those general purpose registers does not have to be changed since the jump instructions will not make use of the general purpose registers. If we need to make the data been processed to be longer than 4 bits, then we need to extend the general purpose registers.
+
+3d) The instruction memory(myROM) must be extended to 1024 * 18. Where 1024 is the myROM address from 0 to 1023, and 18 is the length of each instruction.
+
+3e) For the pcALU have to be modified to comply with 10 bits inputs and outputs. Only in this way the program counter can make use of the pcALU to calculate the next instruction address anywhere from myROM[0] to myROM[1023], this is because the new immediate value is now 10 bits.
+For the dataALU, they don't have to be adjusted if the general purpose registers are still used for 4 bits inputs/immediate value for those arthmetic instructions. But if the user may input arithmetic instructions with more than 4 bits of immediate values, then the dataALU must also be changed to comply 10 bits operations.
+
+
+4)This program multiplies the value in Rg0 by the value in Rg1 using repeated addition.
+It first loads the inputs into Rg0 and Rg1, and initializes Rg2 to zero.
+Then, in a loop, it repeatedly adds Rg0 into Rg2 and decrements Rg1 by one.
+If Rg1 is not zero, the loop repeats; otherwise, the program halts with the product stored in Rg2.
+
+5a) myROM[4]
+
+5b) 0
+
+5c) 5
+
+5d) 7
+
+5e) myROM[2]
+
+5f) 000 0010
+
+
+
+6a) 	Assembly Language: j target
+	Machine Language: 010 0000 0000 0000 11	 
+
+6b)	Assembly Language: jeq $4 $0 target
+	Machine Language: 110 100 000 1111 001
+
+6c)	Assembly Language: slti $1 $4 10
+			   sw $1 isless($0)
+	Machine Language: 111 100 001 000 1010
+			  101 000 001 0000011
+
+6d)	Assembly Language: lw $1 29($0)
+			   sw $1 30($0)
+	Machine Language: 100 000 001 0011101
+			  101 000 001 0011110
+
+
+7)	Assembly Language: addi $1 $1 1
+			   add $2 $2 $2
+			   halt
+
+	Machine Language: 001 001 001 0000001
+			  000 010 010 010 0000
+			  010 000 000 0000010
+
+
+
+
+

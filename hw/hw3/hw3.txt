@@ -1,0 +1,67 @@
+1)
+100 011 110 111 101 001
+
+
+2a)1110 1011 0000
+This instruction compares the value in register 2 and register 3.
+Program counter +1
+Zero flag set to 1 if they are the equal, otherwise set to 0.
+
+2b)1010 0011 0000
+This instruction adds the value in register 0 to register 3.
+Stores the result of addition in register 3.
+Program counter +1
+Zero flag set to 1 if the result is 0, otherwise set to 0.
+
+2c)0010 0000 0001
+This instruction jump to the instruction at address (program counter + 4'b0001) if the zero flag is set to 1
+Program counter + 1
+Zero flag is kept unchanged
+
+
+3a){addi,RXX,Rg1,0011}
+This instruction add the immediate value 4'b0011 to the value in register 1, and store the value in register 1.
+If the result value is 4'b1101, the resultant sum will be 0, hence zero flag will set to 1, otherwise 0.
+Program counter +1
+
+3b){add,Rg1,Rg1,0011} 
+This instruction will add the value in register 1 to register 1, and store the result into register 1.
+If the value in register 1 is 4'b1000 or 4'b0000, the resultant sum will be 4'b0000, the zero flag will be set to 1, otherwise 0.
+Program counter +1
+Immediate value ignored
+
+3c) {jmp,RXX,RXX,0000}
+This instruction will jump to the instruction at address program counter + 4'b0000, which is itself. Indicates the end of a program.
+The program counter + 0
+Zero flag unchanged
+
+3d) {jmp,RXX,RXX,0001}
+This instruction will jump to the instruction at address program counter + 4'b0001.
+The program counter + 1
+Zero flag unchanged
+
+
+4a)3
+
+4b)5
+
+4c)6
+
+
+5a)225 times. 
+Because both registers are first set to be 15. In the inner loop, register 1 was subtracted by 1 for 15 times. Then in the outer loop register 0 will be subtracted by 1 everytime. Later register 1 will be set to 15 again and repeat the entire process until the register 0 becomes 0. Both outer and inner loops are repeated until both registers hold value 0. This nested loop repeats 15*15 = 225 times.
+
+5b)15 times. 
+Because in ROM cell 10 the instruction decrease the value in register 0 by 1. Register 0 was initially 15, hence after 15 decrements, it becomes 0 and make the comparison in MyRom[3] to become true.
+
+5c)0 times. 
+Because the program never go to the cell 12.
+
+5d)Infinite times. 
+Because when the comparison in cell 3 becomes true, the program counter jumps to cell 2 and later the program counter will always increase by 0. Repeating the cell 2 forever, ending the entire program.
+
+5e)This program is doing two count downs. One counter counts down from 15 to 0. The other counter counts how many times of counting down the first counter has done. After the first counter finishes 15 times counting down from 15 to 0, the program will terminate.
+
+
+
+
