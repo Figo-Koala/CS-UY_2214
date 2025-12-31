@@ -1,0 +1,27 @@
+1. ((A&B)&~C)|(~(A&B))
+	A	B	C	Y
+	0	0	0	1
+	0	0	1	1
+	0	1	0	1
+	0	1	1	1
+	1	0	0	1
+	1	0	1	1
+	1	1	0	1
+	1	1	1	0
+
+3. 100011
+4. 9
+5. a)23
+   b)40
+6. a)1111000000001111
+   b)1010101111001101
+7. a)00100010
+   b)11011110
+8. a)211
+   b)8
+   c)255
+9. a)-45
+   b)8
+   c)-1
+10. He is wrong, since the number system will eventually overflow and turn to negative.
+11.

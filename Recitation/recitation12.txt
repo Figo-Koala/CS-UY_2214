@@ -1,0 +1,60 @@
+1.
+	Page table is a data structure used to map virtual pages to the corresponding physical pages.
+
+
+2.
+	The virtual address space is larger than the physical address since the virtual memory separates the address used by the programs to the actual physical addressand use a page table to map them. This makes the programs have more space to use other than those the RAM actually provide.
+
+
+3.
+	The Translation Lookaside Buffer (TLB) is a fully associative cache that holds recently used page table entries, allowing the processor to perform address translation quickly. It is crucial for performance because without it, each memory reference would require several memory accesses to walk the page table, greatly increasing access latency.
+
+
+4.
+	a. 2^22 , so the offset is 22 bits
+	b. 35 bits
+	c. 2^40/2^22 = 2^18 pages
+	d. 18 bits
+	e. 2^35/2^22 = 2^13 pages
+	f. 13 bits
+	g. 2^18 entries
+	h. 13 bits +3 bits = 2 bytes
+	   2^18 *2 = 2^19 bytes
+
+
+5.
+
+| Virtual Address | VPN | PPN | result             | Physical Address 
+| --------------- | --- | --- | ------------------ | ---------------- 
+| 41              | 5   | 10  | –                  | 81           
+| 26              | 3   | 5   | –                  | 42         
+| 15              | 1   | 7   | read-only page     | 63           
+| 59              | 7   | 6   | –                  | 51           
+| 3               | 0   | 2   | –                  | 19           
+| 48              | 6   | 8   | –                  | 64           
+| 34              | 4   | –   | page fault         | –                
+
+
+
+
+
+6.
+
+| Virtual Address | VPN | TLB Hit/Miss | PPN | Physical Address 
+| --------------- | --- | ------------ | --- | ---------------- 
+| 9               | 2   | HIT          | 18  | 73               
+| 72              | 18  | MISS         | –   | –                
+| 26              | 6   | HIT          | 4   | 18               
+| 17              | 4   | MISS         | –   | –                
+| 48              | 12  | HIT          | 12  | 48               
+| 74              | 18  | HIT          | –   | –                
+
+
+
+
+
+
+
+
+
+

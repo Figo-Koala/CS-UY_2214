@@ -1,0 +1,63 @@
+1)Difference:E15 has only 4 bits register while E20 has 16 bits
+	     E15 has 16 memory cells while E20 has 8192 memory cells
+  Similarityes: Both E15 and E20 support logic operations and arithmetic calculations
+		Both E15 and E20 have similar instruction sets that focusing on a limited set of instructions but can run quickly.
+
+
+2a) 000 001 010 100 0100
+Compares the value of Rg1 with Rg2, setting Rg4 to 1 if Rg1 is less than Rg2,
+and to 0 otherwise.
+PC+1
+No modify in memory
+
+2b) 010 000 000 000 1111
+This unconditionally jump to the address of label foobar, which is 15.
+It fills the PC with 15
+No modify in registers
+
+2c) 001 000 001 0000001
+This program moves the imm value 1 to the register 1
+No other registers are modified
+
+2d) 101 001 000 0000000
+This instruction stores the value in the Rg0 into the memory cell at address 0+$1, or the address stored in Rg1.
+The registers are not modified but the memory address in Rg1 is turn into 0.
+
+3a) add $0 $0 $0
+This instruction tried to add value in Rg0 onto Rg0, which is always 0, and tried to store the result into Rg0, but
+Rg0 is read-only, so nothing will be modified
+
+3b) jeq $1 $0 previous
+This instruction compares the value in Rg1 and Rg0, if they are equal, the program counter will jump to PC-1. since the 
+imm = PC+1+(-2) = PC-1
+
+3c) lw $5 31($2)
+This instruction first calculate the memory pointer by summing the value in $2 and 31. Then the result is stored in $5.
+No memory cell modified.
+
+4a) movi $5, 34
+4b) add $3, $1, $2
+4c) add $6, $5, $5
+4d) slti $5, $4, 10
+4e) addi $2, $1, 50
+     jr $2
+4f) slt $7, $2, $1
+     jeq $7, $0 destination
+4g) lw $1, 9($0)
+4h) lw $2, hyoid($0)
+4i) lw $3, 0($4)
+4j)    jeq $2, $0, check_second
+        addi $1, $0, 2
+        halt    
+    check_second:
+        jeq $3, $0, all_zero
+        addi $1, $0, 2
+        halt
+    all_zero:
+        addi $1, $0, 1
+        halt
+
+5)
+$3: 20
+$4: 70
+

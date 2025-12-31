@@ -1,0 +1,56 @@
+1.
+
+a. 16 bytes
+b. 1024 bytes
+
+2.
+
+address | Row | Tag | Result
+
+12	4	1	miss
+13	5	1	miss
+6	6	0	miss
+0	0	0	miss
+2	2	0	miss
+5	5	0	miss & Evict
+14	6	1	miss & Evict
+14	6	1	Hit
+1	1	0	miss
+8	0	1	miss & Evict
+
+3.
+
+address | Row | Tag | Result
+
+12	2	1	miss
+13	2	1	hit
+6	3	0	miss
+0	0	0	miss
+2	1	0	miss
+5	2	0	miss & Evict
+14	3	1	miss & Evict
+14	3	1	Hit
+1	0	0	hit
+8	0	1	miss & Evict
+
+4.
+
+address | Row | Tag | Result
+
+12	1	1	miss
+13	1	1	hit
+6	1	0	miss & Evict
+0	0	0	miss
+2	0	0	hit
+5	1	0	hit
+14	1	1	miss & Evict
+14	1	1	Hit
+1	0	0	hit
+8	0	1	miss & Evict
+
+5.
+
+a. 4096 blocks
+b. 9 bits
+c. 12 bits 
+d. 11 bits

@@ -1,0 +1,43 @@
+1.
+	In a write-through policy, every time data is updated it is written to both the cache and main memory, keeping main memory always current but increasing average write latency.
+In a write-back policy, updates are made only in the cache and written to main memory later, when that cache line is evicted; this speeds up repeated writes but needs extra mechanisms to keep cache and main memory consistent.
+
+
+2.
+	In a write-around policy, write operations bypass the cache and go straight to main memory, avoiding the cost of loading data into the cache when it may not be reused. In contrast, a write-allocate policy brings the block into the cache on a write miss and updates it there, which is advantageous when the written data is likely to be accessed again soon, improving cache utilization and performance.
+
+
+3.
+	Fully associative cache with 1 byte blocks.
+
+4.
+	a. Hit ratio = 31/32 = 96.87%. The total size does not effect the hit ratio since we never go back to used addresses.
+	b.5+ 1/32 * 80 = 7.5
+
+5.
+    lw   $1, 0($0)      # load block with tag=0,  index=0, offset=0
+    lw   $2, 8($0)      # load block with tag=1,  index=0, offset=0
+    lw   $3, 16($0)     # load block with tag=2,  index=0, offset=0, evicts one of the previous blocks
+
+
+
+6. 
+	a. 256 bits
+	b. 344 bits
+	
+
+7.
+	    lw $1, 0($0)   # L1: row 0, block 0, tag 0; L2: row 0, block 0, tag 0
+    	    lw $2, 3($0)   # L1: row 1, block 1, tag 0; L2: row 0, block 0, tag 0
+
+8.
+
+	a. 4096
+	b. 9
+	c. 23
+	d. 2048
+	e. 11
+	f. 12
+	g. 512
+	h. 9
+	i. 14

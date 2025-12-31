@@ -1,0 +1,45 @@
+1.
+10	when A is 0000, B = 0000^1010 = 1010 = 10
+11	when A is 0001, state = 0001, 0001^1010 = 1011 = 11
+11	when A is 0000, state = 0001, 0001^1010 = 1011 = 11
+3	when A is 1001, state = 1001, 1001^1010 = 0011 = 3 
+3	when A is 1000, state = 1001, 1001^1010 = 0011 = 3
+5	when A is 1111, state = 1111, 1111^1010 = 0101 = 5
+5	when A is 0000, state = 1111, 1111^1010 = 0101 = 5
+
+2.
+a) move the value in Rg3 to Rg1, program counter +1, no zero flag
+b) add 5 to Rg 2, and store the value in Rg2, program counter +1, no zero flag
+c) compare the value in Rg1 and Rg3, if same, set zero flag to 1, otherwise 0. Program counter +1
+d) jump to instruction at address 3 if zero flag is set, otherwise pc+1
+
+3.
+1) store 2 into Rg0
+2) store 4 into Rg1
+3) add 2 from Rg0 to Rg1 , store in Rg1
+4) subtract 1 from Rg1, store in Rg1
+
+Rg0 = 2, Rg1 = 5
+
+4.
+a) 101000101100
+b) 110100010110
+c) 111100111101
+d) 001100000010
+
+5.
+a){add,Rg0,Rg1,4'b0000}
+b){jmp,RXX,RXX,4'b0110}
+c){sub,Rg2,Rg3,4'b0000}
+d){movi,RXX,Rg2,4'b1011}
+
+6.
+a)Rg0 = 4, Rg1 = 8
+b)Rg0 = 5, Rg1 = 0
+
+7.
+myRom[0] = {movi,RXX,Rg3,4'b1111}
+myRom[1] = {subi,RXX,Rg3,4'b0001}
+myRom[2] = {jnz,RXX,Rg3,4'b1110}
+myRom[3] = {jmp,RXX,RXX,4'b0000}
+

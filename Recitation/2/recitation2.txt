@@ -1,0 +1,16 @@
+1. D0 = 0, D1 = 1, D2 = 1, D3 = 0
+
+2.
+(a)11
+(b)0
+(c)9
+
+6.
+bool queryLSB(unsigned int x) {
+	return x&1;
+}
+
+7.
+unsigned int flipOnBit3(unsigned int x) {
+	return x|4;
+}

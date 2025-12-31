@@ -1,0 +1,15 @@
+1. The IR (Instruction Register) holds the current instruction being executed. Registers A and B temporarily store the ALU’s input values before the EXEC stage, while aluOut holds the ALU’s output after execution. The MDR (Memory Data Register) stores data coming from memory between the MEM and WB stages. Lastly, the state register—used only by the control unit—keeps track of the processor’s current execution state.
+
+2. 
+a. MUXpc = 1; MUXpcIncr = 1; WEpc = 1
+b. MUXr1 = 1; WEreg = 1; MUXtgt = 1
+c. MUXaddr = 1; WEram = 1
+
+3.
+a. 0, 1, 4, 7, 14
+b. 0, 1, 3, 5, 8
+c. 0, 1, 3, 7, 10
+d. 0, 2, 4, 7, 13
+
+4.
+This is a jr instruction.

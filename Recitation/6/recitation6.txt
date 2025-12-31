@@ -1,0 +1,30 @@
+1.	Similarities: Both multiplexers and "if" statements perform conditional selection, determining which input or branch is used based on a control signal or condition.
+	Differences: A multiplexer evaluates all input signals simultaneously but only forwards the selected one to the output, whereas an "if" statement only evaluates the true condition’s branch while skipping the others
+
+
+
+2.	The sign-extension operation in the E20 processor converts 7-bit immediate values into 16-bit signed (two’s complement) numbers, ensuring that their original sign is preserved when used in calculations with the program counter (PC). Instructions such as jeq and jal rely on these sign-extended offsets to determine jump or branch targets. By maintaining the correct sign, sign-extension enables the processor to handle both forward and backward jumps accurately, ensuring proper control flow throughout program
+
+
+
+3.	For the jeq instruction, the ALU must perform a subtraction to compare the two register values. If their difference is zero, the branch condition is satisfied. Therefore, the control signal should be FUNCalu = 1, corresponding to the subtraction operation.
+
+	For the j instruction, the ALU is not involved, since it is an unconditional jump whose target address is computed directly from the instruction field. Thus, the ALU control signal is FUNCalu = DC, as its output is irrelevant to the operation.
+
+
+
+4.	a. FUNCalu = 0, MUXalu = 1, MUXpc = 1, MUXrf = 0, MUXtgt = 0, MUXdst = 0, WErf = 1, WEdmem = 0
+	b. FUNCalu = 0, MUXalu = 0, MUXpc = 0, MUXrf = 0, MUXtgt = DC, MUXdst = DC, WErf = 0, WEdmem = 0
+	c. FUNCalu = 0, MUXalu = 1, MUXpc = 1, MUXrf = 0, MUXtgt = 2, MUXdst = 0, WErf = 1, WEdmem = 0 
+
+5.	The E20 instruction that matches this configuration is j.We can identify it by first looking at MUXpc = 3, which indicates that the program counter is updated using a 13-bit immediate value. This means its a jump instruction (either j or jal).
+Next, both WErf = 0 and WEdmem = 0 show that neither the register file nor memory is written to. Since jal writes the return address to register $7, it would require WErf = 1. Therefore, this configuration cannot be jal.
+Given these control signals, the only matching instruction is j, an unconditional jump that updates the PC from the immediate field without performing any register or memory writes.
+
+
+
+6.	The E20 instruction corresponding to this configuration is jal.
+To determine this, we first see that MUXpc = 3, which indicates that the next program counter value comes from a 13-bit immediate field. This suggests a jump-type instruction, either j or jal.
+Next, WErf = 1 shows that the instruction writes to the register file, while WEdmem = 0 confirms that it does not write to memory. Since the j instruction does not perform any register write, this eliminates it as a possibility.
+Additionally, MUXdst = 2 specifies that the destination register is $7, which is where jal stores the return address.
+Together, these control signals clearly correspond to the jal instruction.

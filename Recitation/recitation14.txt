@@ -1,0 +1,36 @@
+1. Endianism is the ways the computer stores the value of a multibyte value. There are two types of endianism: Big-endianism and Little-endianism. The big-endianism will always store the most significant bites first. For example, for 0x12345678, in the memory it looks like this: [foo] = 12, [foo+1] = 34, [foo + 2] = 56, [foo+3] = 78. If it is little endianism, the least significant bits will be stored first, and the memory looks like thsi: [foo] = 78, [foo+1] = 56, [foo + 2] = 34, [foo+3] = 12.
+
+2.
+a) 0x00000034
+b) 0x0034
+c) 0x00000c99
+d) 0x0c
+e) 0x0000
+f) 0x99000000
+g) 0x0c
+h) The memory address of the label numbers.
+
+3.
+ebx is a counter, that increments by 1 each time if the least significant bit in eax is 1. eax is examined bit by bit. And the final value in ebx is the number of digits equal to 1 in eax.
+
+4.
+a) 
+mov eax, 0
+mov ebx, 0
+mov esi, num_array
+
+start_loop: 
+mov ecx, [esi]    
+cmp ecx, 0      
+je end_loop  
+
+add eax, ecx      
+cmp ecx, ebx      
+jbe skip   
+mov ebx, ecx      
+
+skip: 
+add esi, 4       
+jmp start_loop   
+
+end_loop:
